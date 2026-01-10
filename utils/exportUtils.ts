@@ -45,12 +45,15 @@ export const generateStandaloneHtml = (doc: ParsedDoc): string => {
     </li>
   `).join('');
 
+  // Remove file extension for display
+  const displayFileName = doc.fileName.replace(/\.[^/.]+$/, "");
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${escapeHtml(doc.fileName)} - DocuFlow Export</title>
+    <title>${escapeHtml(displayFileName)} - DocuFlow Export</title>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
@@ -229,7 +232,7 @@ export const generateStandaloneHtml = (doc: ParsedDoc): string => {
         <aside class="sidebar">
             <div class="p-4 border-b border-slate-800 bg-slate-900">
                 <div class="flex items-center gap-3 text-slate-100">
-                    <h1 class="font-bold text-xl tracking-tight leading-tight break-words">${escapeHtml(doc.fileName)}</h1>
+                    <h1 class="font-bold text-xl tracking-tight leading-tight break-words">${escapeHtml(displayFileName)}</h1>
                 </div>
             </div>
             <nav class="flex-1 overflow-y-auto custom-scrollbar p-2">

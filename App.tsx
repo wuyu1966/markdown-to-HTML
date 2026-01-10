@@ -86,7 +86,7 @@ const App: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${doc.fileName.replace(/\.md$/, '')}-export.html`;
+    a.download = `${doc.fileName.replace(/\.[^/.]+$/, '')}-export.html`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -140,7 +140,7 @@ const App: React.FC = () => {
           >
             <Menu size={24} />
           </button>
-          <span className="font-semibold text-slate-200 truncate max-w-[200px]">{doc.fileName}</span>
+          <span className="font-semibold text-slate-200 truncate max-w-[200px]">{doc.fileName.replace(/\.[^/.]+$/, "")}</span>
         </div>
       </div>
 
@@ -161,7 +161,7 @@ const App: React.FC = () => {
           sections={doc.sections} 
           activeSectionId={activeSectionId || ''} 
           onSelectSection={setActiveSectionId}
-          fileName={doc.fileName}
+          fileName={doc.fileName.replace(/\.[^/.]+$/, "")}
           isOpen={isSidebarOpen}
           onCloseMobile={() => setSidebarOpen(false)}
           onReset={handleReset}
